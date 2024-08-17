@@ -1,15 +1,31 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+        Scanner scan = new Scanner(System.in);
+
+        System.out.println("Temperature: ");
+        double temperature = scan.nextDouble();
+        scan.nextLine();
+        System.out.println("Scale(C/K/F): ");
+        String unit = scan.nextLine();
+        System.out.println("New Scale(C/K/F): ");
+        String newUnit = scan.nextLine();
+
+        Converter converter = new Converter(temperature);
+        String scale = (unit + newUnit).toUpperCase();
+        switch (scale) {
+            case "CK" -> converter.CelsiusToKelvin(temperature);
+            case "CF" -> converter.CelsiusToFahrenheit(temperature);
+            case "KC" -> converter.KelvinToCelsius(temperature);
+            case "KF" -> converter.KelvinToFahrenheit(temperature);
+            case "FC" -> converter.FahrenheitToCelsius(temperature);
+            case "FK" -> converter.FahrenheitToKelvin(temperature);
+            default -> System.out.println("Impossible to convert");
         }
+
+        System.out.println(converter);
+
     }
 }
